@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+
+  # ─── Backend Servisi ────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend   
+      dockerfile: Dockerfile
+    container_name: wordflow-backend
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+    healthcheck:
+      test: ["CMD", "python", "-c", "import boto3; print('OK')"]
+      interval: 30s   
+      timeout: 10s    
+      retries: 3      
+
+  # ─── Test Servisi ───────────────────────────────────────────
+  test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wordflow-test
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+      - ./coverage-reports:/app/htmlcov
+    depends_on:
+      - backend
+    command: >
+      pytest tests/ -v
+      --cov=lambda
+      --cov-report=term
+      --cov-report=html
