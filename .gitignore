@@ -1,0 +1,30 @@
+# ─── Python ───────────────────────────────────────────────────
+# Python'un otomatik ürettiği cache dosyaları
+__pycache__/
+*.py[cod]
+# Sanal ortam klasörü
+venv/
+.env
+# Lambda deploy sırasında oluşan geçici klasör ve zip'ler
+package/
+*.zip
+
+# ─── iOS / Xcode ──────────────────────────────────────────────
+# Xcode'un kişisel ayarları 
+xcuserdata/
+*.xcworkspace
+# Derleme çıktıları
+DerivedData/
+*.ipa
+
+# ─── AWS ──────────────────────────────────────────────────────
+# AWS credentials 
+.aws/
+# ─── Test / Coverage ──────────────────────────────────────────
+.coverage
+coverage.xml
+htmlcov/
+# ─── IDE ──────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
